@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Тест</title></head>
+        <style type = "text/css">
+            div.questionBlock {
+                display: none;
+            }
+        </style>
+        <script type = "text/javascript">
+            var answer;
+        </script>
+    </head>
+    <body background="tz13.jpg"><h1>Шкала депрессии</h1>
+        <div class = "questionBlock">
+           1. ?<br>
+            <input type = "radio" name=q1 value=" 0">1<br>
+            <input type = "radio" name=q1 value=" 1">2<br>
+            <input type = "radio" name=q1 value=" 2">3<br>
+            <input type = "radio" name=q1 value=" 3">4<br> 
+        </div>
+        <input type="button" value="Ответить"  onclick="qa.nextOrResult()"> 
+        <script type = "text/javascript">
+            var qa = new QuestAnalizer();
+            function QuestAnalizer() {
+                var now = 0, printed = false, rightCount = 0;
+                var questionBlocks = document.querySelectorAll("div.questionBlock");
+                var allQCount = questionBlocks.length;
+                this.nowRight = 0;
+                questionBlocks[now].style.display = "block";
+                this.nextOrResult = function () {
+                    if (now >= allQCount-1) {
+                        now++;
+                        if (!printed) {
+                            questionBlocks[now - 1].style.display = "none"
+                            var p = document.createElement("p");
+                            p.innerHTML = "Верных ответов " + value + ". Вы набрали " + (value / allQCount * 100).toFixed(0) + "%";
+                            document.body.appendChild(p);
+                            printed = true;
+                        } else {
+                            alert("Ваш результат на экране.");
+                        }
+                    } else {
+                        questionBlocks[now].style.display = "none";
+                        now++;
+                        rightCount += this.nowRight;
+                        questionBlocks[now].style.display = "block";
+                    }
+                }
+            }
+            
+        </script>
+    </body>
+</html>
